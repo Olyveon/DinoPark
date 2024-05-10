@@ -1,10 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1tom3lko7gjj"]
+[gd_scene load_steps=6 format=3 uid="uid://b1tom3lko7gjj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8t4nh"]
+[ext_resource type="Texture2D" uid="uid://c6dwgxf60u7qj" path="res://assets/sprites/standard_tilemap.png" id="1_oenw5"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ine23"]
+texture = ExtResource("1_oenw5")
+texture_region_size = Vector2i(256, 144)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -8)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -8)
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, -8)
 
 [sub_resource type="TileSet" id="TileSet_okvup"]
 tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
 tile_size = Vector2i(256, 128)
+sources/0 = SubResource("TileSetAtlasSource_ine23")
 
 [sub_resource type="GDScript" id="GDScript_6jcqk"]
 script/source = "extends Camera2D
@@ -25,6 +41,7 @@ func _process(delta):
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_okvup")
 format = 2
+layer_0/tile_data = PackedInt32Array(3, 131072, 0, 2, 65536, 0, -65534, 65536, 0, -65533, 131072, 0, 65540, 65536, 0, 65539, 131072, 0, 65538, 65536, 0, 4, 65536, 0, -65532, 65536, 0, -131068, 65536, 0, -131069, 131072, 0, -131070, 65536, 0, -131071, 65536, 0, -65535, 65536, 0, 1, 65536, 0, 65537, 65536, 0, 131073, 65536, 0, 131074, 65536, 0, 131075, 131072, 0, 131076, 65536, 0, 131077, 65536, 0, 65541, 65536, 0, 5, 65536, 0, -65531, 65536, 0, -131067, 65536, 0)
 
 [node name="Player" type="Node2D" parent="."]
 script = ExtResource("1_8t4nh")
@@ -33,16 +50,25 @@ script = ExtResource("1_8t4nh")
 position = Vector2(577, 322)
 script = SubResource("GDScript_6jcqk")
 
-[node name="UI" type="Control" parent="Player"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CanvasLayer" type="CanvasLayer" parent="Player"]
 
-[node name="Label" type="Label" parent="Player/UI"]
-layout_mode = 0
-offset_left = 1022.0
-offset_top = 623.0
-offset_right = 1152.0
-offset_bottom = 646.0
+[node name="UI" type="Control" parent="Player/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Player/CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
 text = "work in progress"
