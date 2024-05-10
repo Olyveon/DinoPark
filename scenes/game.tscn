@@ -1,7 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://b1tom3lko7gjj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8t4nh"]
-[ext_resource type="Texture2D" uid="uid://b226vek86yph" path="res://assets/sprites/coin.png" id="2_8rpn1"]
+
+[sub_resource type="TileSet" id="TileSet_okvup"]
+tile_shape = 1
+tile_size = Vector2i(256, 128)
 
 [sub_resource type="GDScript" id="GDScript_6jcqk"]
 script/source = "extends Camera2D
@@ -20,15 +23,26 @@ func _process(delta):
 [node name="Game" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_okvup")
 format = 2
 
-[node name="player" type="Node2D" parent="."]
+[node name="Player" type="Node2D" parent="."]
 script = ExtResource("1_8t4nh")
 
-[node name="Camera2D" type="Camera2D" parent="player"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(577, 322)
 script = SubResource("GDScript_6jcqk")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(691, 304)
-texture = ExtResource("2_8rpn1")
+[node name="UI" type="Control" parent="Player"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Player/UI"]
+layout_mode = 0
+offset_left = 1022.0
+offset_top = 623.0
+offset_right = 1152.0
+offset_bottom = 646.0
+text = "work in progress"
