@@ -95,7 +95,7 @@ offset_right = -2.0
 offset_bottom = -2.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "work in progress"
+text = "Work in progress"
 
 [node name="Label2" type="Label" parent="Player/Interface/UI"]
 layout_mode = 1
