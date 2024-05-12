@@ -27,9 +27,9 @@ func _input(event: InputEvent):
 				if camera.zoom < zoom_maximum:
 					camera.zoom += zoom_speed
 					pass
+			# Improvised construction mode 
 			if event.button_index == MOUSE_BUTTON_LEFT:
 				var mouse_position = tile_map.local_to_map(Vector2i(get_global_mouse_position()))
-				print(mouse_position)
 				tile_map.set_cell(1,mouse_position,1,Vector2i(1,0))
 			if event.button_index == MOUSE_BUTTON_RIGHT:
 				var mouse_position = tile_map.local_to_map(Vector2i(get_global_mouse_position()))
