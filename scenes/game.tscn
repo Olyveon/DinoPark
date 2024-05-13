@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1tom3lko7gjj"]
+[gd_scene load_steps=12 format=3 uid="uid://b1tom3lko7gjj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8t4nh"]
 [ext_resource type="Texture2D" uid="uid://c6dwgxf60u7qj" path="res://assets/sprites/standard_tilemap.png" id="1_oenw5"]
@@ -35,6 +35,28 @@ tile_size = Vector2i(256, 128)
 sources/0 = SubResource("TileSetAtlasSource_ine23")
 sources/1 = SubResource("TileSetAtlasSource_6ddg8")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w1h5b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2sc5l"]
+bg_color = Color(0.366367, 0.63479, 0.796681, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_te7l0"]
+bg_color = Color(0.2116, 0.36892, 0.46, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.61, 0.61, 0.61, 1)
+
+[sub_resource type="Theme" id="Theme_tod64"]
+Button/styles/hover = SubResource("StyleBoxFlat_w1h5b")
+Button/styles/normal = SubResource("StyleBoxFlat_2sc5l")
+Button/styles/pressed = SubResource("StyleBoxFlat_te7l0")
+
 [node name="Game" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -57,6 +79,7 @@ script = ExtResource("1_8t4nh")
 position = Vector2(577, 322)
 
 [node name="Interface" type="CanvasLayer" parent="Player"]
+layer = 2
 
 [node name="UI" type="Control" parent="Player/Interface"]
 layout_mode = 3
@@ -94,8 +117,34 @@ grow_vertical = 0
 text = "Development Branch
 "
 
+[node name="HBoxContainer" type="HBoxContainer" parent="Player/Interface/UI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 522.0
+offset_top = -44.0
+offset_right = -503.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Building" type="Button" parent="Player/Interface/UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Toggles building mode "
+mouse_filter = 1
+theme = SubResource("Theme_tod64")
+toggle_mode = true
+action_mode = 0
+text = "Building Mode
+"
+
 [node name="Menu" type="CanvasLayer" parent="Player"]
 process_mode = 3
+layer = 3
 
 [node name="Pause" type="Control" parent="Player/Menu"]
 visible = false
@@ -144,5 +193,8 @@ text = "Main Menu"
 layout_mode = 2
 text = "Exit Game"
 
+[connection signal="mouse_entered" from="Player/Interface/UI/HBoxContainer" to="Player" method="_on_h_box_container_mouse_entered"]
+[connection signal="mouse_exited" from="Player/Interface/UI/HBoxContainer" to="Player" method="_on_h_box_container_mouse_exited"]
+[connection signal="toggled" from="Player/Interface/UI/HBoxContainer/Building" to="Player" method="_on_construction_toggled"]
 [connection signal="pressed" from="Player/Menu/Pause/BlackOverlay/VBoxContainer/MainMenu" to="Player/Menu/Pause" method="_on_main_menu_pressed"]
 [connection signal="pressed" from="Player/Menu/Pause/BlackOverlay/VBoxContainer/Exit" to="Player/Menu/Pause" method="_on_exit_pressed"]
