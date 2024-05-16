@@ -90,6 +90,7 @@ offset_right = 1.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="Player/Interface/UI"]
 layout_mode = 1
@@ -193,6 +194,7 @@ text = "Main Menu"
 layout_mode = 2
 text = "Exit Game"
 
+[connection signal="mouse_entered" from="Player/Interface/UI" to="Player" method="_on_ui_mouse_entered"]
 [connection signal="mouse_entered" from="Player/Interface/UI/HBoxContainer" to="Player" method="_on_h_box_container_mouse_entered"]
 [connection signal="mouse_exited" from="Player/Interface/UI/HBoxContainer" to="Player" method="_on_h_box_container_mouse_exited"]
 [connection signal="toggled" from="Player/Interface/UI/HBoxContainer/Building" to="Player" method="_on_construction_toggled"]

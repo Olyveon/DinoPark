@@ -46,6 +46,7 @@ func _on_construction_toggled(toggled_on):
 
 # Makes sure that the mouse is not currently in the ui to not mess with things behind it 
 func _on_h_box_container_mouse_entered():
+	pass
 	print("hovered")
 	ui_hover = false
 
@@ -55,3 +56,7 @@ func _on_h_box_container_mouse_exited():
 
 
 
+
+
+func _on_ui_mouse_entered():
+	print("ui hovered")
