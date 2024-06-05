@@ -1,13 +1,11 @@
 extends Node2D
-@onready var camera = $Camera2D
+@onready var camera = $Camera
 const camera_speed = 200.0
 # Camera zoom values
 var zoom_minimum = Vector2(.2,.2)
 var zoom_maximum = Vector2(2.5,2.5)
 var zoom_speed = Vector2(.1,.1)
 
-func _ready():
-	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Gets the direction and moves the "player" which in turn moves the camera
@@ -15,6 +13,7 @@ func _process(delta):
 	var direction_y = Input.get_axis("move_up","move_down")
 	position.x += camera_speed * direction_x * delta
 	position.y += camera_speed * direction_y * delta
+	
 func _input(event: InputEvent):
 	if event is InputEventMouseButton:
 		# Checks if the mouse wheel it's changing and zooms in or out 

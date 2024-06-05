@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b1tom3lko7gjj"]
+[gd_scene load_steps=16 format=3 uid="uid://b1tom3lko7gjj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8t4nh"]
 [ext_resource type="Texture2D" uid="uid://c6dwgxf60u7qj" path="res://assets/sprites/standard_tilemap.png" id="1_oenw5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dj7p2rqw3s24g" path="res://assets/sprites/standard_buildings.png" id="2_qo3u4"]
 [ext_resource type="PackedScene" uid="uid://dhv0rqpd7v57h" path="res://scripts/building.tscn" id="4_8ndy6"]
 [ext_resource type="Script" path="res://scripts/pause.gd" id="4_4261l"]
+[ext_resource type="Script" path="res://savedGame/save_loader.gd" id="7_6alr0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ine23"]
 resource_name = "terrain"
@@ -75,7 +76,7 @@ y_sort_enabled = true
 tile_set = SubResource("TileSet_okvup")
 format = 2
 layer_0/y_sort_enabled = true
-layer_0/tile_data = PackedInt32Array(3, 196608, 0, 2, 131072, 268435456, -65533, 131072, 0, 65540, 65536, 0, 65539, 131072, 0, 65538, 65536, 0, 4, 131072, 268435456, -65532, 65536, 0, -131068, 65536, 0, -131069, 131072, 0, -131070, 65536, 0, -131071, 65536, 0, -65535, 65536, 0, 1, 131072, 268435456, 65537, 65536, 0, 131073, 65536, 0, 131074, 65536, 0, 131075, 131072, 0, 131076, 65536, 0, 131077, 65536, 0, 65541, 65536, 0, 5, 196608, 1, -65531, 65536, 0, -131067, 65536, 0, -196608, 196608, 0, -131072, 131072, 0, -65536, 131072, 0, 0, 196608, 0, 131072, 131072, 0, -196607, 196608, 1, -196606, 196608, 1, -196605, 196608, 0, -196604, 196608, 1, -196603, 196608, 1, -262141, 131072, 0, -262144, 131072, 0, -131073, 196608, 1, 65535, 196608, 1, 196607, 65536, 0, -65537, 65536, 0, -1, 65536, 0, -196609, 65536, 0, -262143, 65536, 0, -262142, 65536, 0, -262140, 65536, 0, -262139, 65536, 0, -196610, 65536, 0, -262146, 65536, 0, -262145, 65536, 0, -327676, 65536, 0, -327675, 65536, 0, -327679, 65536, 0, -327678, 65536, 0, -65538, 65536, 0, -2, 65536, 0, 131070, 65536, 0, 196606, 65536, 0, 65534, 196608, 1, -131074, 196608, 1, -327677, 131072, 0, -327680, 131072, 0, 131071, 65536, 0, 65536, 131072, 0, -65534, 65536, 0)
+layer_0/tile_data = PackedInt32Array(3, 196608, 0, 2, 131072, 268435456, -65533, 131072, 0, 65540, 65536, 0, 65539, 131072, 0, 65538, 65536, 0, 4, 131072, 268435456, -65532, 65536, 0, -131068, 65536, 0, -131069, 131072, 0, -131070, 65536, 0, -131071, 65536, 0, 1, 131072, 268435456, 65537, 65536, 0, 131073, 65536, 0, 131074, 65536, 0, 131075, 131072, 0, 131076, 65536, 0, 131077, 65536, 0, 65541, 65536, 0, 5, 196608, 1, -65531, 65536, 0, -131067, 65536, 0, -196608, 196608, 0, -131072, 131072, 0, -65536, 131072, 0, 0, 196608, 0, 131072, 131072, 0, -196607, 196608, 1, -196606, 196608, 1, -196605, 196608, 0, -196604, 196608, 1, -196603, 196608, 1, -262141, 131072, 0, -262144, 131072, 0, -131073, 196608, 1, 65535, 196608, 1, 196607, 65536, 0, -65537, 65536, 0, -1, 65536, 0, -196609, 65536, 0, -262143, 65536, 0, -262142, 65536, 0, -262140, 65536, 0, -262139, 65536, 0, -196610, 65536, 0, -262146, 65536, 0, -262145, 65536, 0, -327676, 65536, 0, -327675, 65536, 0, -327679, 65536, 0, -327678, 65536, 0, -65538, 65536, 0, -2, 65536, 0, 131070, 65536, 0, 196606, 65536, 0, 65534, 196608, 1, -131074, 196608, 1, -327677, 131072, 0, -327680, 131072, 0, 131071, 65536, 0, 65536, 131072, 0, -65535, 65536, 0, -65534, 65536, 0)
 layer_1/name = "Layer 1"
 layer_1/y_sort_enabled = true
 layer_1/y_sort_origin = 1
@@ -83,15 +84,16 @@ layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
 
 [node name="Player" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("1_8t4nh")
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera" type="Camera2D" parent="Player"]
 position = Vector2(577, 322)
 
-[node name="Interface" type="CanvasLayer" parent="Player"]
+[node name="Interface" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="UI" type="Control" parent="Player/Interface"]
+[node name="UI" type="Control" parent="Interface"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -102,7 +104,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="Player/Interface/UI"]
+[node name="Label" type="Label" parent="Interface/UI"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -117,7 +119,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Work in Progress"
 
-[node name="Branch" type="Label" parent="Player/Interface/UI"]
+[node name="Branch" type="Label" parent="Interface/UI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -128,7 +130,7 @@ grow_vertical = 0
 text = "Development Branch
 "
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Player/Interface/UI"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface/UI"]
 custom_minimum_size = Vector2(0.975, 0)
 layout_mode = 1
 anchors_preset = 12
@@ -141,7 +143,7 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="Building" type="Button" parent="Player/Interface/UI/HBoxContainer"]
+[node name="Building" type="Button" parent="Interface/UI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -153,11 +155,11 @@ action_mode = 0
 text = "Building Mode
 "
 
-[node name="Menu" type="CanvasLayer" parent="Player"]
+[node name="Menu" type="CanvasLayer" parent="."]
 process_mode = 3
 layer = 3
 
-[node name="Pause" type="Control" parent="Player/Menu"]
+[node name="Pause" type="Control" parent="Menu"]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -167,7 +169,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_4261l")
 
-[node name="BlackOverlay" type="ColorRect" parent="Player/Menu/Pause"]
+[node name="BlackOverlay" type="ColorRect" parent="Menu/Pause"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -176,7 +178,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.439216)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Player/Menu/Pause/BlackOverlay"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Pause/BlackOverlay"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -190,22 +192,38 @@ offset_bottom = 124.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Player/Menu/Pause/BlackOverlay/VBoxContainer"]
+[node name="Label" type="Label" parent="Menu/Pause/BlackOverlay/VBoxContainer"]
 layout_mode = 2
 text = "DinoPark"
 horizontal_alignment = 1
 
-[node name="MainMenu" type="Button" parent="Player/Menu/Pause/BlackOverlay/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="Menu/Pause/BlackOverlay/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Main Menu"
 
-[node name="Exit" type="Button" parent="Player/Menu/Pause/BlackOverlay/VBoxContainer"]
+[node name="Save" type="Button" parent="Menu/Pause/BlackOverlay/VBoxContainer"]
+layout_mode = 2
+text = "Save Game"
+
+[node name="Load" type="Button" parent="Menu/Pause/BlackOverlay/VBoxContainer"]
+layout_mode = 2
+text = "Load Game"
+
+[node name="Exit" type="Button" parent="Menu/Pause/BlackOverlay/VBoxContainer"]
 layout_mode = 2
 text = "Exit Game"
 
-[connection signal="mouse_entered" from="Player/Interface/UI/HBoxContainer" to="." method="_on_h_box_container_mouse_entered"]
-[connection signal="mouse_exited" from="Player/Interface/UI/HBoxContainer" to="." method="_on_h_box_container_mouse_exited"]
-[connection signal="toggled" from="Player/Interface/UI/HBoxContainer/Building" to="." method="_on_building_toggled"]
-[connection signal="pressed" from="Player/Menu/Pause/BlackOverlay/VBoxContainer/MainMenu" to="Player/Menu/Pause" method="_on_main_menu_pressed"]
-[connection signal="pressed" from="Player/Menu/Pause/BlackOverlay/VBoxContainer/Exit" to="Player/Menu/Pause" method="_on_exit_pressed"]
+[node name="Utilities" type="Node" parent="."]
+
+[node name="SaveLoader" type="Node" parent="Utilities"]
+unique_name_in_owner = true
+script = ExtResource("7_6alr0")
+
+[connection signal="mouse_entered" from="Interface/UI/HBoxContainer" to="." method="_on_h_box_container_mouse_entered"]
+[connection signal="mouse_exited" from="Interface/UI/HBoxContainer" to="." method="_on_h_box_container_mouse_exited"]
+[connection signal="toggled" from="Interface/UI/HBoxContainer/Building" to="." method="_on_building_toggled"]
+[connection signal="pressed" from="Menu/Pause/BlackOverlay/VBoxContainer/MainMenu" to="Menu/Pause" method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Menu/Pause/BlackOverlay/VBoxContainer/Save" to="Utilities/SaveLoader" method="save_game"]
+[connection signal="pressed" from="Menu/Pause/BlackOverlay/VBoxContainer/Load" to="Utilities/SaveLoader" method="load_game"]
+[connection signal="pressed" from="Menu/Pause/BlackOverlay/VBoxContainer/Exit" to="Menu/Pause" method="_on_exit_pressed"]

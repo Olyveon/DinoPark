@@ -8,10 +8,6 @@ var is_point_inside = false
 func _ready():
 	cell_position = tile_map.local_to_map(position)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-	
 func _input(event):
 	# Check if the event is a mouse button press
 	if event.is_action_pressed("click_left"):

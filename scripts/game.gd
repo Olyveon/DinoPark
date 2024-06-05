@@ -2,15 +2,10 @@ extends Node2D
 var building_mode = false
 var ui_hover = true
 @onready var tile_map = %TileMap
-@export var building: PackedScene
-const BUILDING = preload("res://scripts/building.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	building_mode = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 #Construction mode
 func _input(event):
 	if building_mode and ui_hover:
