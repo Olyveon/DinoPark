@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c6dwgxf60u7qj" path="res://assets/sprites/standard_tilemap.png" id="1_oenw5"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_phgyx"]
 [ext_resource type="Texture2D" uid="uid://dj7p2rqw3s24g" path="res://assets/sprites/standard_buildings.png" id="2_qo3u4"]
-[ext_resource type="PackedScene" uid="uid://dhv0rqpd7v57h" path="res://scripts/building.tscn" id="4_8ndy6"]
+[ext_resource type="PackedScene" uid="uid://dhv0rqpd7v57h" path="res://scenes/building.tscn" id="4_8ndy6"]
 [ext_resource type="Script" path="res://scripts/pause.gd" id="4_4261l"]
 [ext_resource type="Script" path="res://savedGame/save_loader.gd" id="7_6alr0"]
 
