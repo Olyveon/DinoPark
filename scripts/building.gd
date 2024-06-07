@@ -7,16 +7,17 @@ var is_point_inside = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#cell_position = tile_map.local_to_map(position)
-	pass
+	cell_position = tile_map.local_to_map(position)
+	tile_map.set_cell(1,cell_position,1,Vector2i(0,1))
 
 func _input(event):
 	# Check if the event is a mouse button press
 	if is_point_inside:
 			if event.is_action_pressed("click_left"):
-				_on_click()
+				on_click()
 			if event.is_action_pressed("click_right"):
 				if Global.building_mode:
+					tile_map.erase_cell(1,cell_position)
 					tile_map.remove_child(self)
 					queue_free()
 
@@ -28,7 +29,7 @@ func _on_area_2d_mouse_exited():
 	is_point_inside = false
 
 # Pontentially add a hover on inteface to see the building's data
-func _on_click():
+func on_click():
 	pass
 	
 func on_save_game(saved_data:Array[SavedData]):
