@@ -1,4 +1,5 @@
 extends Node
+@onready var canvas_modulate = %CanvasModulate
 @onready var tile_map = %TileMap
 @onready var player = %Player
 @onready var camera = player.get_child(0)
@@ -6,6 +7,8 @@ extends Node
 func save_game():
 	var saved_game:SavedGame = SavedGame.new()
 	
+	saved_game.global_time = Global.time
+	saved_game.global_past_minute = Global.past_minute
 	saved_game.camera_zoom = camera.zoom
 	saved_game.player_position = player.position
 	
@@ -18,8 +21,11 @@ func save_game():
 
 func load_game():
 	Global.on_load()
+	canvas_modulate.on_load()
 	var saved_game:SavedGame = load("user://savegame.tres") as SavedGame
 	
+	Global.past_minute = saved_game.global_past_minute - 1.0
+	Global.time = saved_game.global_time
 	player.position = saved_game.player_position
 	camera.zoom = saved_game.camera_zoom
 	

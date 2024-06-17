@@ -1,10 +1,16 @@
 extends Node2D
+
 var ui_hover = true
+
 @onready var tile_map = %TileMap
+@onready var ui = %UI
+@onready var canvas_modulate = %CanvasModulate
+
 @export var building:PackedScene = load("res://scenes/building.tscn")
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	Global.building_mode = false
+	canvas_modulate.time_tick.connect(ui.set_daytime)
 
 #Construction mode
 func _input(event):

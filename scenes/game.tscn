@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b1tom3lko7gjj"]
+[gd_scene load_steps=19 format=3 uid="uid://b1tom3lko7gjj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8t4nh"]
 [ext_resource type="Texture2D" uid="uid://c6dwgxf60u7qj" path="res://assets/sprites/standard_tilemap.png" id="1_oenw5"]
@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://dj7p2rqw3s24g" path="res://assets/sprites/standard_buildings.png" id="2_qo3u4"]
 [ext_resource type="PackedScene" uid="uid://dhv0rqpd7v57h" path="res://scenes/building.tscn" id="4_8ndy6"]
 [ext_resource type="Script" path="res://scripts/pause.gd" id="4_4261l"]
+[ext_resource type="Script" path="res://scripts/day_night_cycle.gd" id="6_bodcb"]
 [ext_resource type="Script" path="res://savedGame/save_loader.gd" id="7_6alr0"]
+[ext_resource type="Texture2D" uid="uid://bkpc1kjm4t2xn" path="res://assets/daynightcycle-gradient-texture.tres" id="7_g0air"]
+[ext_resource type="Script" path="res://scripts/ui_controller.gd" id="8_s0tum"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ine23"]
 resource_name = "terrain"
@@ -91,10 +94,17 @@ script = ExtResource("1_8t4nh")
 [node name="Camera" type="Camera2D" parent="Player"]
 position = Vector2(577, 322)
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+unique_name_in_owner = true
+color = Color(0.166521, 0.14248, 0.448751, 1)
+script = ExtResource("6_bodcb")
+gradient = ExtResource("7_g0air")
+
 [node name="Interface" type="CanvasLayer" parent="."]
 layer = 2
 
 [node name="UI" type="Control" parent="Interface"]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -104,6 +114,7 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("8_s0tum")
 
 [node name="Label" type="Label" parent="Interface/UI"]
 layout_mode = 1
@@ -155,6 +166,19 @@ toggle_mode = true
 action_mode = 0
 text = "Building Mode
 "
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Interface/UI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="DayLabel" type="Label" parent="Interface/UI/HBoxContainer2"]
+layout_mode = 2
+text = "Day"
+
+[node name="HourLabel" type="Label" parent="Interface/UI/HBoxContainer2"]
+layout_mode = 2
 
 [node name="Menu" type="CanvasLayer" parent="."]
 process_mode = 3
