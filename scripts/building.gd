@@ -1,14 +1,18 @@
 extends Node2D
+
 var cell_position
 var building_name:String = "building"
 var is_point_inside = false
+
 @onready var tile_map = get_parent()
+@onready var timer = $Timer
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	cell_position = tile_map.local_to_map(position)
 	tile_map.set_cell(1,cell_position,1,Vector2i(0,1))
+	timer.start()
 
 func _input(event):
 	# Check if the event is a mouse button press
@@ -31,7 +35,7 @@ func _on_area_2d_mouse_exited():
 # Pontentially add a hover on inteface to see the building's data
 func on_click():
 	pass
-	
+
 func on_save_game(saved_data:Array[SavedData]):
 	var my_data = SavedData.new()
 	my_data.position = global_position
@@ -47,3 +51,7 @@ func on_before_load():
 func on_load_game(saved_data:SavedData):
 	global_position = saved_data.position
 	building_name = saved_data.building_name
+
+
+func _on_timer_timeout():
+	Global.money += 10

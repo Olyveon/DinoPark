@@ -2,6 +2,10 @@ extends Control
 
 @onready var day_label = $HBoxContainer2/DayLabel
 @onready var time_label = $HBoxContainer2/HourLabel
+@onready var money_label = $HBoxContainer2/MoneyLabel
+
+func _process(delta):
+	money_label.text = "$" + str(Global.money)
 
 func set_daytime(day: int, hour: int, minute: int) -> void:
 	day_label.text = "Day " + str(day + 1)

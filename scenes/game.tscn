@@ -96,7 +96,6 @@ position = Vector2(577, 322)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 unique_name_in_owner = true
-color = Color(0.166521, 0.14248, 0.448751, 1)
 script = ExtResource("6_bodcb")
 gradient = ExtResource("7_g0air")
 
@@ -178,6 +177,9 @@ layout_mode = 2
 text = "Day"
 
 [node name="HourLabel" type="Label" parent="Interface/UI/HBoxContainer2"]
+layout_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="Interface/UI/HBoxContainer2"]
 layout_mode = 2
 
 [node name="Menu" type="CanvasLayer" parent="."]
