@@ -41,7 +41,7 @@ func on_save_game(saved_data:Array[SavedData]):
 	my_data.position = global_position
 	my_data.building_name = building_name
 	my_data.scene_path = scene_file_path
-	
+	my_data.timer_left = timer.time_left
 	saved_data.append(my_data)
 
 func on_before_load():
@@ -50,8 +50,10 @@ func on_before_load():
 
 func on_load_game(saved_data:SavedData):
 	global_position = saved_data.position
+	timer.start(saved_data.timer_left)
 	building_name = saved_data.building_name
 
 
 func _on_timer_timeout():
+	timer.wait_time = 10
 	Global.money += 10
