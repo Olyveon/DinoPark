@@ -6,6 +6,7 @@ const INGAME_TO_REAL_MINUTE_DURATION = (2 * PI) / MINUTES_PER_DAY
 
 signal time_tick(day:int, hour:int, minute:int)
 
+var prev_speed = 1.0
 @export var gradient:GradientTexture1D
 @export var INGAME_SPEED = 1.0
 @export var INITIAL_HOUR = 8:
@@ -15,6 +16,7 @@ signal time_tick(day:int, hour:int, minute:int)
 
 
 func on_load():
+	INGAME_SPEED = 0.0
 	_recaculate_time()
 
 func _ready() -> void:
@@ -26,7 +28,13 @@ func _process(delta: float) -> void:
 	self.color = gradient.gradient.sample(value)
 	
 	_recaculate_time()
-
+func _input(event):
+	if event.is_action_pressed("stop"):
+		if INGAME_SPEED > 0:
+			prev_speed = INGAME_SPEED
+			INGAME_SPEED = 0.0
+		else:
+			INGAME_SPEED = prev_speed
 func _recaculate_time() -> void:
 	var total_minutes = int(Global.time / INGAME_TO_REAL_MINUTE_DURATION)
 	

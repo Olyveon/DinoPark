@@ -13,9 +13,6 @@ script = ExtResource("1_yjjry")
 position = Vector2(0, -64)
 texture = ExtResource("2_c6whn")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
-
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -23,6 +20,5 @@ position = Vector2(0, -64)
 rotation = 0.785398
 shape = SubResource("ConvexPolygonShape2D_tc4cw")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
