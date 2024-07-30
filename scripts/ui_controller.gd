@@ -3,6 +3,7 @@ extends Control
 @onready var day_label = $HBoxContainer2/DayLabel
 @onready var time_label = $HBoxContainer2/HourLabel
 @onready var money_label = $HBoxContainer2/MoneyLabel
+@onready var texture_rect = $TextureRect
 
 func _process(delta):
 	money_label.text = "$" + str(Global.money)
@@ -10,7 +11,9 @@ func _process(delta):
 func set_daytime(day: int, hour: int, minute: int) -> void:
 	day_label.text = "Day " + str(day + 1)
 	time_label.text = _amfm_hour(hour) + ":" + _minute(minute) + " " + _am_pm(hour)
-
+func pause()->void:
+	var new_state = not texture_rect.visible
+	texture_rect.visible = new_state
 
 func _amfm_hour(hour:int) -> String:
 	if hour == 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b1tom3lko7gjj"]
+[gd_scene load_steps=18 format=3 uid="uid://b1tom3lko7gjj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8t4nh"]
 [ext_resource type="Texture2D" uid="uid://c6dwgxf60u7qj" path="res://assets/sprites/standard_tilemap.png" id="1_oenw5"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/day_night_cycle.gd" id="6_bodcb"]
 [ext_resource type="Script" path="res://savedGame/save_loader.gd" id="7_6alr0"]
 [ext_resource type="Texture2D" uid="uid://bkpc1kjm4t2xn" path="res://assets/daynightcycle-gradient-texture.tres" id="7_g0air"]
+[ext_resource type="Texture2D" uid="uid://bexsjgxatiitj" path="res://assets/sprites/outline.png" id="8_j6yto"]
 [ext_resource type="Script" path="res://scripts/ui_controller.gd" id="8_s0tum"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ine23"]
@@ -99,27 +100,24 @@ layer = 2
 [node name="UI" type="Control" parent="Interface"]
 unique_name_in_owner = true
 layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1.0
-offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("8_s0tum")
 
-[node name="Label" type="Label" parent="Interface/UI"]
+[node name="WIP" type="Label" parent="Interface/UI"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -132.0
-offset_top = -25.0
-offset_right = -2.0
-offset_bottom = -2.0
+offset_left = -139.0
+offset_top = -32.0
+offset_right = -7.0
+offset_bottom = -9.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Work in Progress"
@@ -129,8 +127,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 164.0
+offset_left = 5.0
+offset_top = -26.0
+offset_right = 169.0
+offset_bottom = -3.0
 grow_vertical = 0
 text = "Development Branch
 "
@@ -164,6 +164,10 @@ text = "Building Mode
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 7.0
+offset_bottom = 31.0
 grow_horizontal = 2
 
 [node name="DayLabel" type="Label" parent="Interface/UI/HBoxContainer2"]
@@ -175,6 +179,17 @@ layout_mode = 2
 
 [node name="MoneyLabel" type="Label" parent="Interface/UI/HBoxContainer2"]
 layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Interface/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_j6yto")
 
 [node name="Menu" type="CanvasLayer" parent="."]
 process_mode = 3

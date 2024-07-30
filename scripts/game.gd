@@ -11,6 +11,7 @@ var ui_hover = true
 func _ready():
 	Global.building_mode = false
 	canvas_modulate.time_tick.connect(ui.set_daytime)
+	canvas_modulate.pause_tick.connect(ui.pause)
 
 #Construction mode
 func _input(event):
