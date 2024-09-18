@@ -53,7 +53,5 @@ func is_in_bounds(position:Vector2i):
 	available_list = tile_map.get_used_cells(2)
 	for item in available_list:
 		if item == position:
-			print("in bounds")
 			return true
-	print("out of bounds!")
 	return false
