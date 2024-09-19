@@ -121,13 +121,12 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -139.0
-offset_top = -32.0
-offset_right = -7.0
-offset_bottom = -9.0
+offset_left = -132.0
+offset_top = -23.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "Version 0.1 Work in Progress"
+theme_override_font_sizes/font_size = 12
+text = "v0.1a Work in Progress"
 
 [node name="Branch" type="Label" parent="Interface/UI"]
 layout_mode = 1
