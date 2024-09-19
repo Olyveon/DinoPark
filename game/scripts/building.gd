@@ -5,16 +5,18 @@ const MINUTES_PER_HOUR = 60
 const INGAME_TO_REAL_MINUTE_DURATION = (2 * PI) / MINUTES_PER_DAY
 
 var cell_position
-var building_name:String = "building"
+var building_name:String = "Edificio base"
 var is_point_inside = false
 # cooldown is defined in in-game minutes 
 var cooldown = 120
+# This variables are used when loading and unloading a game file
 var target_minute = 60
 var target_hour = 24
 # How much money does it generate
 var revenue = 10
-@onready var tile_map = get_parent()
 
+@onready var tile_map = get_parent()
+@onready var menu_info_scene = preload("res://scenes/ui/info_box.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,7 +34,8 @@ func _input(event):
 	# Check if the event is a mouse button press
 	if is_point_inside:
 			if event.is_action_pressed("click_left"):
-				on_click()
+				if Global.building_mode == false:
+					on_click()
 			if event.is_action_pressed("click_right"):
 				if Global.building_mode:
 					tile_map.erase_cell(1,cell_position)
@@ -48,7 +51,12 @@ func _on_area_2d_mouse_exited():
 
 # Pontentially add a hover on inteface to see the building's data
 func on_click():
-	pass
+	if get_child(2) != null:
+		return
+	var menu_box = menu_info_scene.instantiate()
+	add_child(menu_box)
+	var revenue_per_hour = revenue/(cooldown/MINUTES_PER_HOUR)
+	menu_box.display_info(building_name,revenue_per_hour)
 
 func on_save_game(saved_data:Array[SavedData]):
 	var my_data = SavedData.new()
@@ -91,3 +99,4 @@ func on_time():
 
 func minutes(x):
 	return 60/x
+
