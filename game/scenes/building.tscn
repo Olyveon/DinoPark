@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhv0rqpd7v57h"]
+
+[ext_resource type="Script" path="res://scripts/building.gd" id="1_yjjry"]
+[ext_resource type="Texture2D" uid="uid://qygmiw3higp6" path="res://assets/sprites/standard_building.png" id="2_c6whn"]
+
+[node name="Building" type="Node2D" groups=["buildings", "game_objects"]]
+script = ExtResource("1_yjjry")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -64)
+texture = ExtResource("2_c6whn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(0, -64, -127, 0, 0, 65, 128, 1)
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
