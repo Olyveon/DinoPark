@@ -11,6 +11,11 @@ func _process(delta):
 func set_daytime(day: int, hour: int, minute: int) -> void:
 	day_label.text = "Day " + str(day + 1)
 	time_label.text = _amfm_hour(hour) + ":" + _minute(minute) + " " + _am_pm(hour)
+
+func pause_ui()-> void:
+	texture_rect.visible = true
+	print("puto")
+
 func pause()->void:
 	var new_state = not texture_rect.visible
 	texture_rect.visible = new_state

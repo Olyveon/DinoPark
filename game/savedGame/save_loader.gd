@@ -3,6 +3,10 @@ extends Node
 @onready var tile_map = %TileMap
 @onready var player = %Player
 @onready var camera = player.get_child(0)
+func _ready():
+	if Global.load == true:
+		load_game()
+
 # We use Resources to save the game this lets us save the game in a fast, human-readable, easy way 
 func save_game():
 	var saved_game:SavedGame = SavedGame.new()
@@ -18,7 +22,6 @@ func save_game():
 	saved_game.saved_data = saved_data
 	
 	ResourceSaver.save(saved_game, "user://savegame.tres")
-	print("saved")
 
 func load_game():
 	Global.on_load()
@@ -40,5 +43,4 @@ func load_game():
 		
 		if restored_node.has_method("on_load_game"):
 			restored_node.on_load_game(item)
-		
-	print("loaded")
+
