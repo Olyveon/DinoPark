@@ -1,6 +1,5 @@
 extends CanvasModulate
 
-@onready var game = $".."
 
 const MINUTES_PER_DAY = 1440 
 const MINUTES_PER_HOUR = 60
@@ -8,7 +7,6 @@ const INGAME_TO_REAL_MINUTE_DURATION = (2 * PI) / MINUTES_PER_DAY
 
 signal time_tick(day:int, hour:int, minute:int)
 signal pause_tick()
-signal pause_ui()
 
 var prev_speed = 1.0
 @export var gradient:GradientTexture1D
@@ -19,9 +17,7 @@ var prev_speed = 1.0
 		Global.time = INGAME_TO_REAL_MINUTE_DURATION * INITIAL_HOUR * MINUTES_PER_HOUR
 
 func on_load():
-	INGAME_SPEED = 0.0
-	await  game.ready
-	pause_ui.emit() 
+	INGAME_SPEED = 1.0
 	_recaculate_time()
 
 func _ready() -> void:

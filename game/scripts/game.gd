@@ -12,9 +12,6 @@ func _ready():
 	Global.building_mode = false
 	canvas_modulate.time_tick.connect(ui.set_daytime)
 	canvas_modulate.pause_tick.connect(ui.pause)
-	canvas_modulate.pause_ui.connect(ui.pause_ui)
-	ready.emit()
-	
 
 #Construction mode
 func _input(event):
