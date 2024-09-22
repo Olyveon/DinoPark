@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b1tom3lko7gjj"]
+[gd_scene load_steps=19 format=3 uid="uid://b1tom3lko7gjj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8t4nh"]
 [ext_resource type="Texture2D" uid="uid://c6dwgxf60u7qj" path="res://assets/sprites/standard_tilemap.png" id="1_oenw5"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://savedGame/save_loader.gd" id="7_6alr0"]
 [ext_resource type="Texture2D" uid="uid://bkpc1kjm4t2xn" path="res://assets/daynightcycle-gradient-texture.tres" id="7_g0air"]
 [ext_resource type="Texture2D" uid="uid://bexsjgxatiitj" path="res://assets/sprites/outline.png" id="8_j6yto"]
+[ext_resource type="PackedScene" uid="uid://bsq4asob8uns8" path="res://scenes/ui/bulding_window.tscn" id="8_r41ji"]
 [ext_resource type="Script" path="res://scripts/ui_controller.gd" id="8_s0tum"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ine23"]
@@ -121,10 +122,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -139.0
-offset_top = -32.0
-offset_right = -7.0
-offset_bottom = -9.0
+offset_left = -136.0
+offset_top = -27.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Work in Progress"
@@ -145,27 +146,31 @@ text = "Development Branch
 [node name="HBoxContainer" type="HBoxContainer" parent="Interface/UI"]
 custom_minimum_size = Vector2(0.975, 0)
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -47.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_left = -218.0
+offset_bottom = 56.0
+grow_horizontal = 0
 alignment = 1
 
 [node name="Building" type="Button" parent="Interface/UI/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_horizontal = 0
+size_flags_vertical = 0
 tooltip_text = "Toggles building mode "
 mouse_filter = 1
 theme = SubResource("Theme_tod64")
 toggle_mode = true
 action_mode = 0
-text = "Building Mode
-"
+text = "
+Building"
+
+[node name="Window" parent="Interface/UI/HBoxContainer/Building" instance=ExtResource("8_r41ji")]
+position = Vector2i(755, 91)
+size = Vector2i(376, 50)
+visible = false
+unresizable = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Interface/UI"]
 layout_mode = 1
@@ -173,7 +178,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_left = 7.0
 offset_top = 8.0
-offset_right = 7.0
+offset_right = -710.0
 offset_bottom = 31.0
 grow_horizontal = 2
 

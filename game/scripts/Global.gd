@@ -5,6 +5,7 @@ var time:float = 0.0
 var past_minute:float = -1.0
 var money:int = 1000
 var load = false
+var building_id:int
 
 func on_load():
 	building_mode = false
