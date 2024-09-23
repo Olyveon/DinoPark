@@ -1,17 +1,22 @@
 extends Node2D
 
 var ui_hover = true
-
+var buildings_list:Array
 @onready var tile_map = %TileMap
 @onready var ui = %UI
 @onready var canvas_modulate = %CanvasModulate
+@onready var building_window = $Interface/UI/HBoxContainer/Building/Window
 
 @export var building:PackedScene = load("res://scenes/building.tscn")
+
+
 
 func _ready():
 	Global.building_mode = false
 	canvas_modulate.time_tick.connect(ui.set_daytime)
 	canvas_modulate.pause_tick.connect(ui.pause)
+	# Adds all the buildings to an array with its id 
+	buildings_list.insert(0,building)
 
 #Construction mode
 func _input(event):
@@ -19,11 +24,12 @@ func _input(event):
 		if event.is_action_pressed("click_left"):
 			var mouse_position = tile_map.local_to_map(Vector2i(get_global_mouse_position()))
 			if is_free(mouse_position) and is_in_bounds(mouse_position):
-				build(mouse_position,1)
+				build(mouse_position,Global.building_id)
 			else:
 				return
+
 func build(position:Vector2,id:int):
-	var new_building = building.instantiate()
+	var new_building = buildings_list[id].instantiate()
 	Global.money -= 10
 	new_building.global_position = tile_map.map_to_local(position)
 	tile_map.add_child(new_building)
@@ -38,6 +44,8 @@ func _on_h_box_container_mouse_exited():
 
 func _on_building_toggled(toggled_on):
 	Global.building_mode = toggled_on 
+	building_window.visible = toggled_on
+	
 
 # Check if the tile is free before building 
 func is_free(position:Vector2i):

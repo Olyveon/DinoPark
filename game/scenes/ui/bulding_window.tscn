@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsq4asob8uns8"]
+
+[ext_resource type="Script" path="res://scripts/bulding_window.gd" id="1_je6y0"]
+
+[node name="Window" type="Window"]
+size = Vector2i(436, 180)
+script = ExtResource("1_je6y0")
+
+[node name="standard" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Standard Building"
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="standard" to="." method="_on_standard_pressed"]
