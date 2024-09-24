@@ -89,6 +89,11 @@ script = ExtResource("1_8t4nh")
 
 [node name="Camera" type="Camera2D" parent="Player"]
 position = Vector2(577, 322)
+limit_left = -3060
+limit_top = -2615
+limit_right = 2680
+limit_bottom = 2535
+limit_smoothed = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 unique_name_in_owner = true
