@@ -17,10 +17,7 @@ func _ready():
 	canvas_modulate.pause_tick.connect(ui.pause)
 	# Adds all the buildings to an array with its id 
 	buildings_list.insert(0,building)
-	var tree = CustomTree.new()
-	tree.inicializar()
-	print(tree.combinar(4,5))
-	print(tree.combinar(6,7))
+
 
 #Construction mode
 func _input(event):
@@ -62,7 +59,7 @@ func is_free(position:Vector2i):
 
 func is_in_bounds(position:Vector2i):
 	var available_list:Array =[]
-	available_list = tile_map.get_used_cells(2)
+	available_list = tile_map.get_used_cells(0)
 	for item in available_list:
 		if item == position:
 			return true
