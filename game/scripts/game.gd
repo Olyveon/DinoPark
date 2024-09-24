@@ -8,7 +8,7 @@ var buildings_list:Array
 @onready var building_window = $Interface/UI/HBoxContainer/Building/Window
 
 @export var building:PackedScene = load("res://scenes/building.tscn")
-
+@export var dinocell:PackedScene = load("res://scenes/dino_cell.tscn")
 
 
 func _ready():
@@ -17,6 +17,7 @@ func _ready():
 	canvas_modulate.pause_tick.connect(ui.pause)
 	# Adds all the buildings to an array with its id 
 	buildings_list.insert(0,building)
+	buildings_list.insert(1,dinocell)
 
 
 #Construction mode

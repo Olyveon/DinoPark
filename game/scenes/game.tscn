@@ -161,8 +161,7 @@ text = "
 Building"
 
 [node name="Window" parent="Interface/UI/HBoxContainer/Building" instance=ExtResource("8_r41ji")]
-position = Vector2i(755, 91)
-size = Vector2i(376, 50)
+position = Vector2i(990, 100)
 visible = false
 unresizable = true
 

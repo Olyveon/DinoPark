@@ -3,13 +3,21 @@
 [ext_resource type="Script" path="res://scripts/bulding_window.gd" id="1_je6y0"]
 
 [node name="Window" type="Window"]
-size = Vector2i(436, 180)
+size = Vector2i(150, 70)
 script = ExtResource("1_je6y0")
 
-[node name="standard" type="Button" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="standard" type="Button" parent="GridContainer"]
+layout_mode = 2
 text = "Standard Building"
 
+[node name="cell" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Jaula"
+
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
-[connection signal="pressed" from="standard" to="." method="_on_standard_pressed"]
+[connection signal="pressed" from="GridContainer/standard" to="." method="_on_standard_pressed"]
+[connection signal="pressed" from="GridContainer/cell" to="." method="_on_cell_pressed"]
