@@ -17,6 +17,10 @@ func _ready():
 	canvas_modulate.pause_tick.connect(ui.pause)
 	# Adds all the buildings to an array with its id 
 	buildings_list.insert(0,building)
+	var tree = CustomTree.new()
+	tree.inicializar()
+	print(tree.combinar(4,5))
+	print(tree.combinar(6,7))
 
 #Construction mode
 func _input(event):

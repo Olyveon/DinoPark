@@ -2,18 +2,17 @@
 #define TREE_HPP
 
 #include <iostream>
-#include <string>
 
 using namespace std;
 
-class Nodo {
+class Dato {
 public:
-    string dinosaurio;
-    Nodo* padre;
-    Nodo* hijo_izquierdo;
-    Nodo* hijo_derecho;
+    int dinosaurio;
+    Dato* padre;
+    Dato* hijo_izquierdo;
+    Dato* hijo_derecho;
 
-    Nodo(string dino) {
+    Dato(int dino) {
         dinosaurio = dino;
         padre = nullptr;
         hijo_izquierdo = nullptr;
@@ -23,59 +22,58 @@ public:
 
 class Arbol {
 public:
-    Nodo* raiz;
+    Dato* raiz;
 
     Arbol() {
         raiz = nullptr;
     }
 
-    // Inicializar el árbol con cuatro dinosaurios
+    // Inicializar el árbol con cuatro dinosaurios (ahora usando enteros)
     void inicializar_arbol() {
-        raiz = new Nodo("A");  // Nodo raíz del árbol
+        raiz = new Dato(1);  // Dato raíz del árbol
 
-        // Hijos del nodo raíz
-        raiz->hijo_izquierdo = new Nodo("B");
-        raiz->hijo_derecho = new Nodo("C");
+        // Hijos del Dato raíz
+        raiz->hijo_izquierdo = new Dato(2);
+        raiz->hijo_derecho = new Dato(3);
 
-        // Hijos de B
-        raiz->hijo_izquierdo->hijo_izquierdo = new Nodo("D");
-        raiz->hijo_izquierdo->hijo_derecho = new Nodo("E");
+        // Hijos de 2
+        raiz->hijo_izquierdo->hijo_izquierdo = new Dato(4);
+        raiz->hijo_izquierdo->hijo_derecho = new Dato(5);
 
-        // Hijos de C
-        raiz->hijo_derecho->hijo_izquierdo = new Nodo("F");
-        raiz->hijo_derecho->hijo_derecho = new Nodo("G");
+        // Hijos de 3
+        raiz->hijo_derecho->hijo_izquierdo = new Dato(6);
+        raiz->hijo_derecho->hijo_derecho = new Dato(7);
     }
 
-    // Encontrar el ancestro común más cercano entre dos dinosaurios
-    Nodo* encontrar_ancestro_comun(Nodo* nodo, string dino1, string dino2) {
-        if (nodo == nullptr)
+    // Encontrar el ancestro común más cercano entre dos dinosaurios (ahora usando enteros)
+    Dato* encontrar_ancestro_comun(Dato* dato, int dino1, int dino2) {
+        if (dato == nullptr)
             return nullptr;
 
-        // Si el nodo actual es alguno de los dinosaurios, devolvemos ese nodo
-        if (nodo->dinosaurio == dino1 || nodo->dinosaurio == dino2)
-            return nodo;
+        // Si el Dato actual es alguno de los dinosaurios, devolvemos ese Dato
+        if (dato->dinosaurio == dino1 || dato->dinosaurio == dino2)
+            return dato;
 
         // Buscar el ancestro en los subárboles izquierdo y derecho
-        Nodo* ancestro_izquierdo = encontrar_ancestro_comun(nodo->hijo_izquierdo, dino1, dino2);
-        Nodo* ancestro_derecho = encontrar_ancestro_comun(nodo->hijo_derecho, dino1, dino2);
+        Dato* ancestro_izquierdo = encontrar_ancestro_comun(dato->hijo_izquierdo, dino1, dino2);
+        Dato* ancestro_derecho = encontrar_ancestro_comun(dato->hijo_derecho, dino1, dino2);
 
-        // Si ambos subárboles tienen resultado, el nodo actual es el ancestro común
+        // Si ambos subárboles tienen resultado, el Dato actual es el ancestro común
         if (ancestro_izquierdo && ancestro_derecho)
-            return nodo;
+            return dato;
 
         // Si solo uno de los subárboles tiene resultado, devolvemos ese subárbol
         return ancestro_izquierdo ? ancestro_izquierdo : ancestro_derecho;
     }
 
-    // Función para combinar dos dinosaurios
-    string combinar_dinosaurios(string dino1, string dino2) {
+    // Función para combinar dos dinosaurios (ahora usando enteros)
+    int combinar_dinosaurios(int dino1, int dino2) {
         if (dino1 == dino2)
             return dino1;  // Si son el mismo dinosaurio, no se combinan
 
         // Encontrar el ancestro común más cercano
-        Nodo* ancestro = encontrar_ancestro_comun(raiz, dino1, dino2);
-        return ancestro ? ancestro->dinosaurio : "";
+        Dato* ancestro = encontrar_ancestro_comun(raiz, dino1, dino2);
+        return ancestro ? ancestro->dinosaurio : -1;  // Devolver -1 si no se encuentra
     }
 };
-
 #endif
