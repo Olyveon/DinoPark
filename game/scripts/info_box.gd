@@ -8,4 +8,4 @@ func display_info(window_name:String, revenue):
 
 
 func _on_close_requested():
-	queue_free()
+	visible = false

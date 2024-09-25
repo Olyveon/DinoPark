@@ -15,8 +15,9 @@ var target_hour = 24
 # How much money does it generate
 var revenue = 10
 
+@onready var menu_box = $MenuBox
 @onready var tile_map = get_parent()
-@onready var menu_info_scene = preload("res://scenes/ui/info_box.tscn")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -53,10 +54,10 @@ func _on_area_2d_mouse_exited():
 
 # Its called when the building is clicked
 func on_click():
-	if get_child(2) != null:
-		return
-	var menu_box = menu_info_scene.instantiate()
-	add_child(menu_box)
+	var new_state = !menu_box.visible
+	menu_box.visible = new_state
+	if new_state == true :
+		menu_box.position = menu_box.position - Vector2i(20,20)
 	var revenue_per_hour = revenue/(cooldown/MINUTES_PER_HOUR)
 	menu_box.display_info(building_name,revenue_per_hour)
 

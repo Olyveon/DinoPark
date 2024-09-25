@@ -3,9 +3,8 @@
 [ext_resource type="Script" path="res://scripts/info_box.gd" id="1_0owp4"]
 
 [node name="MenuBox" type="Window"]
-title = "upps"
-initial_position = 1
 size = Vector2i(200, 100)
+unfocusable = true
 min_size = Vector2i(200, 80)
 keep_title_visible = true
 script = ExtResource("1_0owp4")
