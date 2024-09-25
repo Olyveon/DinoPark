@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b1tom3lko7gjj"]
+[gd_scene load_steps=20 format=3 uid="uid://b1tom3lko7gjj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8t4nh"]
 [ext_resource type="Texture2D" uid="uid://c6dwgxf60u7qj" path="res://assets/sprites/standard_tilemap.png" id="1_oenw5"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bexsjgxatiitj" path="res://assets/sprites/outline.png" id="8_j6yto"]
 [ext_resource type="PackedScene" uid="uid://bsq4asob8uns8" path="res://scenes/ui/bulding_window.tscn" id="8_r41ji"]
 [ext_resource type="Script" path="res://scripts/ui_controller.gd" id="8_s0tum"]
+[ext_resource type="Script" path="res://scripts/graf.gd" id="13_qjvc1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ine23"]
 resource_name = "terrain"
@@ -265,6 +266,9 @@ text = "Exit Game"
 [node name="SaveLoader" type="Node" parent="Utilities"]
 unique_name_in_owner = true
 script = ExtResource("7_6alr0")
+
+[node name="Graph" type="Node" parent="Utilities"]
+script = ExtResource("13_qjvc1")
 
 [connection signal="mouse_entered" from="Interface/UI/HBoxContainer" to="." method="_on_h_box_container_mouse_entered"]
 [connection signal="mouse_exited" from="Interface/UI/HBoxContainer" to="." method="_on_h_box_container_mouse_exited"]
