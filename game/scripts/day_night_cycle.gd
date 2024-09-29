@@ -39,7 +39,7 @@ func _input(event):
 		else:
 			INGAME_SPEED = prev_speed
 			pause_tick.emit()
-	if event.is_action_pressed("KEY_M") and INGAME_SPEED<5.0:
+	if event.is_action_pressed("KEY_M") and INGAME_SPEED<10.0:
 		INGAME_SPEED +=1.0
 	if event.is_action_pressed("KEY_N") and INGAME_SPEED>1.0:
 		INGAME_SPEED -=1.0
