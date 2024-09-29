@@ -9,8 +9,9 @@
 [node name="Window" type="Window"]
 title = "Edificios"
 initial_position = 1
-size = Vector2i(256, 150)
+size = Vector2i(256, 110)
 unresizable = true
+content_scale_aspect = 4
 theme = ExtResource("2_8m508")
 script = ExtResource("1_je6y0")
 
@@ -22,6 +23,8 @@ offset_bottom = 66.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
+auto_translate = false
+localize_numeral_system = false
 theme = ExtResource("2_8m508")
 
 [node name="standard" type="Button" parent="GridContainer"]
@@ -35,8 +38,9 @@ layout_mode = 2
 text = "Jaula"
 
 [node name="Button" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(256, 33)
 layout_mode = 2
-text = "Montaña Rusa"
+text = "Montaña"
 icon = ExtResource("3_e5skm")
 icon_alignment = 2
 expand_icon = true
