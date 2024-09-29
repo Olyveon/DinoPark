@@ -39,6 +39,11 @@ func _input(event):
 		else:
 			INGAME_SPEED = prev_speed
 			pause_tick.emit()
+	if event.is_action_pressed("KEY_M") and INGAME_SPEED<5.0:
+		INGAME_SPEED +=1.0
+	if event.is_action_pressed("KEY_N") and INGAME_SPEED>1.0:
+		INGAME_SPEED -=1.0
+
 func _recaculate_time() -> void:
 	var total_minutes = int(Global.time / INGAME_TO_REAL_MINUTE_DURATION)
 	
@@ -51,3 +56,4 @@ func _recaculate_time() -> void:
 	if Global.past_minute != minute:
 		Global.past_minute = minute
 		time_tick.emit(day,hour,minute)
+

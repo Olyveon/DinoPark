@@ -1,22 +1,24 @@
 extends Node2D
 
+
 const MINUTES_PER_DAY = 1440 
 const MINUTES_PER_HOUR = 60
 const INGAME_TO_REAL_MINUTE_DURATION = (2 * PI) / MINUTES_PER_DAY
 
 var cell_position
-var building_name:String = "Edificio base"
+var building_name:String = "Museum"
 var is_point_inside = false
 # cooldown is defined in in-game minutes 
-var cooldown = 120
+var cooldown = 45
 # This variables are used when loading and unloading a game file
 var target_minute = 60
 var target_hour = 24
 # How much money does it generate
-var revenue = 10
+var revenue = 55
 
 @onready var menu_box = $MenuBox
 @onready var tile_map = get_parent()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -57,8 +59,7 @@ func on_click():
 	menu_box.visible = new_state
 	if new_state == true :
 		menu_box.position = menu_box.position - Vector2i(20,20)
-	var revenue_per_hour = revenue/(cooldown/MINUTES_PER_HOUR)
-	menu_box.display_info(building_name,revenue_per_hour)
+		menu_box.mesage(building_name,"Actualmente esta generando: " + "$" + str(revenue) + " cada " + str(cooldown) + " minutos" )
 
 # Defines what properties will be saved 
 func on_save_game(saved_data:Array[SavedData]):
@@ -105,4 +106,3 @@ func on_time():
 
 func minutes(x):
 	return 60/x
-

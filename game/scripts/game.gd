@@ -9,7 +9,9 @@ var buildings_list:Array
 
 @export var building:PackedScene = load("res://scenes/building.tscn")
 @export var dinocell:PackedScene = load("res://scenes/dino_cell.tscn")
-
+@export var mountain:PackedScene = load("res://scenes/mountain.tscn")
+@export var museum:PackedScene = load("res://scenes/museum.tscn")
+@export var rueda:PackedScene = load("res://scenes/rueda.tscn")
 
 func _ready():
 	Global.building_mode = false
@@ -18,6 +20,9 @@ func _ready():
 	# Adds all the buildings to an array with its id 
 	buildings_list.insert(0,building)
 	buildings_list.insert(1,dinocell)
+	buildings_list.insert(2,mountain)
+	buildings_list.insert(3, museum)
+	buildings_list.insert(4,rueda)
 
 
 #Construction mode
@@ -32,7 +37,7 @@ func _input(event):
 
 func build(position:Vector2,id:int):
 	var new_building = buildings_list[id].instantiate()
-	Global.money -= 10
+	Global.money -= 100
 	new_building.global_position = tile_map.map_to_local(position)
 	tile_map.add_child(new_building)
 	
@@ -65,3 +70,6 @@ func is_in_bounds(position:Vector2i):
 		if item == position:
 			return true
 	return false
+
+
+
