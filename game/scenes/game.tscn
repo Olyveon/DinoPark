@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b1tom3lko7gjj"]
+[gd_scene load_steps=21 format=3 uid="uid://b1tom3lko7gjj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8t4nh"]
 [ext_resource type="Texture2D" uid="uid://c6dwgxf60u7qj" path="res://assets/sprites/standard_tilemap.png" id="1_oenw5"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bexsjgxatiitj" path="res://assets/sprites/outline.png" id="8_j6yto"]
 [ext_resource type="PackedScene" uid="uid://bsq4asob8uns8" path="res://scenes/ui/bulding_window.tscn" id="8_r41ji"]
 [ext_resource type="Script" path="res://scripts/ui_controller.gd" id="8_s0tum"]
+[ext_resource type="Theme" uid="uid://dtj8rj0oefags" path="res://scenes/ui/DinoPark.tres" id="10_c8ufq"]
 [ext_resource type="Script" path="res://scripts/graf.gd" id="13_qjvc1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ine23"]
@@ -61,27 +62,7 @@ sources/0 = SubResource("TileSetAtlasSource_ine23")
 sources/1 = SubResource("TileSetAtlasSource_6ddg8")
 sources/3 = SubResource("TileSetAtlasSource_qp6wo")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w1h5b"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2sc5l"]
-bg_color = Color(0.366367, 0.63479, 0.796681, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_te7l0"]
-bg_color = Color(0.2116, 0.36892, 0.46, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.61, 0.61, 0.61, 1)
-
-[sub_resource type="Theme" id="Theme_tod64"]
-Button/styles/hover = SubResource("StyleBoxFlat_w1h5b")
-Button/styles/normal = SubResource("StyleBoxFlat_2sc5l")
-Button/styles/pressed = SubResource("StyleBoxFlat_te7l0")
+[sub_resource type="Theme" id="Theme_2pwv4"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_phgyx")
@@ -180,7 +161,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 tooltip_text = "Toggles building mode "
 mouse_filter = 1
-theme = SubResource("Theme_tod64")
+theme = ExtResource("10_c8ufq")
 toggle_mode = true
 action_mode = 0
 text = "
@@ -243,7 +224,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.439216)
+color = Color(0, 0.623529, 0.247059, 0.6)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu/Pause/BlackOverlay"]
 layout_mode = 1
@@ -261,6 +242,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="Menu/Pause/BlackOverlay/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_2pwv4")
 text = "DinoPark"
 horizontal_alignment = 1
 
