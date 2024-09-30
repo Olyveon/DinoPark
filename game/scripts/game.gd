@@ -6,7 +6,7 @@ var buildings_list:Array
 @onready var ui = %UI
 @onready var canvas_modulate = %CanvasModulate
 @onready var building_window = $Interface/UI/HBoxContainer/Building/Window
-
+@onready var estructura= get_node("/root/Game/Utilities/Clist")
 @export var building:PackedScene = load("res://scenes/building.tscn")
 @export var dinocell:PackedScene = load("res://scenes/dino_cell.tscn")
 @export var mountain:PackedScene = load("res://scenes/mountain.tscn")
@@ -23,6 +23,7 @@ func _ready():
 	buildings_list.insert(2,mountain)
 	buildings_list.insert(3, museum)
 	buildings_list.insert(4,rueda)
+	estructura.lista_edificio.mostrar_lista()
 
 
 #Construction mode
@@ -32,14 +33,18 @@ func _input(event):
 			var mouse_position = tile_map.local_to_map(Vector2i(get_global_mouse_position()))
 			if is_free(mouse_position) and is_in_bounds(mouse_position):
 				build(mouse_position,Global.building_id)
+				
+				
 			else:
 				return
 
 func build(position:Vector2,id:int):
 	var new_building = buildings_list[id].instantiate()
+	estructura.lista_edificio.agregar("0")
 	Global.money -= 100
 	new_building.global_position = tile_map.map_to_local(position)
 	tile_map.add_child(new_building)
+	print("edificio agregado b")
 	
 	
 # Makes sure that the mouse is not currently in the ui to not mess with things behind it 
@@ -48,6 +53,10 @@ func _on_h_box_container_mouse_entered():
 
 func _on_h_box_container_mouse_exited():
 	ui_hover = true
+
+
+
+
 
 func _on_building_toggled(toggled_on):
 	Global.building_mode = toggled_on 

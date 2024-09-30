@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_oos1t"]
 [ext_resource type="Texture2D" uid="uid://bb6xyjjwykkf1" path="res://assets/sprites/Fondo.png" id="2_fwx5i"]
-[ext_resource type="Theme" uid="uid://dtj8rj0oefags" path="res://scenes/ui/DinoPark.tres" id="3_87bus"]
+[ext_resource type="Theme" uid="uid://orocpndgjqbk" path="res://scenes/ui/DinoPark.tres" id="3_87bus"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3

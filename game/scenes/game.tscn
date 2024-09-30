@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b1tom3lko7gjj"]
+[gd_scene load_steps=26 format=3 uid="uid://b1tom3lko7gjj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8t4nh"]
 [ext_resource type="Texture2D" uid="uid://c6dwgxf60u7qj" path="res://assets/sprites/standard_tilemap.png" id="1_oenw5"]
@@ -11,10 +11,15 @@
 [ext_resource type="Script" path="res://savedGame/save_loader.gd" id="7_6alr0"]
 [ext_resource type="Texture2D" uid="uid://bkpc1kjm4t2xn" path="res://assets/daynightcycle-gradient-texture.tres" id="7_g0air"]
 [ext_resource type="Texture2D" uid="uid://bexsjgxatiitj" path="res://assets/sprites/outline.png" id="8_j6yto"]
-[ext_resource type="PackedScene" uid="uid://bsq4asob8uns8" path="res://scenes/ui/bulding_window.tscn" id="8_r41ji"]
+[ext_resource type="PackedScene" uid="uid://j4jtar5evxf4" path="res://scenes/ui/bulding_window.tscn" id="8_r41ji"]
 [ext_resource type="Script" path="res://scripts/ui_controller.gd" id="8_s0tum"]
-[ext_resource type="Theme" uid="uid://dtj8rj0oefags" path="res://scenes/ui/DinoPark.tres" id="10_c8ufq"]
+[ext_resource type="Theme" uid="uid://orocpndgjqbk" path="res://scenes/ui/DinoPark.tres" id="10_c8ufq"]
 [ext_resource type="Script" path="res://scripts/graf.gd" id="13_qjvc1"]
+[ext_resource type="Script" path="res://scenes/Scripanel.gd" id="13_sgbkh"]
+[ext_resource type="Script" path="res://scenes/botonE.gd" id="14_syfex"]
+[ext_resource type="Script" path="res://scripts/ListC.gd" id="16_j8b5s"]
+[ext_resource type="Script" path="res://scripts/ArbolC.gd" id="17_cddlq"]
+[ext_resource type="Script" path="res://scenes/Hast.gd" id="19_vbns1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ine23"]
 resource_name = "terrain"
@@ -168,9 +173,7 @@ text = "
 Building"
 
 [node name="Window" parent="Interface/UI/HBoxContainer/Building" instance=ExtResource("8_r41ji")]
-position = Vector2i(990, 100)
 visible = false
-unresizable = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Interface/UI"]
 layout_mode = 1
@@ -202,6 +205,31 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("8_j6yto")
+
+[node name="Panel" type="Panel" parent="Interface/UI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 82.0
+offset_top = 46.0
+offset_right = 380.0
+offset_bottom = 438.0
+script = ExtResource("13_sgbkh")
+
+[node name="Mision_container" type="VBoxContainer" parent="Interface/UI/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 297.0
+offset_bottom = 348.0
+
+[node name="Evolucion" type="Button" parent="Interface/UI"]
+layout_mode = 0
+offset_left = 1284.0
+offset_top = 96.0
+offset_right = 1372.0
+offset_bottom = 129.0
+text = "Evolucion 1
+dino"
+script = ExtResource("14_syfex")
 
 [node name="Menu" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -272,9 +300,21 @@ script = ExtResource("7_6alr0")
 [node name="Graph" type="Node" parent="Utilities"]
 script = ExtResource("13_qjvc1")
 
+[node name="Clist" type="CustomList" parent="Utilities"]
+unique_name_in_owner = true
+script = ExtResource("16_j8b5s")
+
+[node name="CArbol" type="CustomTree" parent="Utilities"]
+script = ExtResource("17_cddlq")
+
+[node name="THast" type="CustomList" parent="Utilities"]
+unique_name_in_owner = true
+script = ExtResource("19_vbns1")
+
 [connection signal="mouse_entered" from="Interface/UI/HBoxContainer" to="." method="_on_h_box_container_mouse_entered"]
 [connection signal="mouse_exited" from="Interface/UI/HBoxContainer" to="." method="_on_h_box_container_mouse_exited"]
 [connection signal="toggled" from="Interface/UI/HBoxContainer/Building" to="." method="_on_building_toggled"]
+[connection signal="ready" from="Interface/UI/Panel" to="Interface/UI/Panel" method="_on_ready"]
 [connection signal="pressed" from="Menu/Pause/BlackOverlay/VBoxContainer/MainMenu" to="Menu/Pause" method="_on_main_menu_pressed"]
 [connection signal="pressed" from="Menu/Pause/BlackOverlay/VBoxContainer/Save" to="Utilities/SaveLoader" method="save_game"]
 [connection signal="pressed" from="Menu/Pause/BlackOverlay/VBoxContainer/Load" to="Utilities/SaveLoader" method="load_game"]
