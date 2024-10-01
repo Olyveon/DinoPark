@@ -179,6 +179,7 @@ visible = false
 layout_mode = 2
 theme = ExtResource("10_c8ufq")
 text = "Missions"
+script = ExtResource("17_cddlq")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Interface/UI"]
 layout_mode = 1
@@ -212,6 +213,7 @@ mouse_filter = 2
 texture = ExtResource("8_j6yto")
 
 [node name="Evolucion" type="Button" parent="Interface/UI"]
+visible = false
 layout_mode = 0
 offset_left = 1284.0
 offset_top = 96.0
@@ -228,6 +230,7 @@ offset_left = 82.0
 offset_top = 46.0
 offset_right = 380.0
 offset_bottom = 438.0
+theme = ExtResource("10_c8ufq")
 script = ExtResource("13_sgbkh")
 
 [node name="Mision_container" type="VBoxContainer" parent="Interface/UI/Panel"]
@@ -321,6 +324,7 @@ script = ExtResource("19_vbns1")
 [connection signal="mouse_exited" from="Interface/UI/HBoxContainer" to="." method="_on_h_box_container_mouse_exited"]
 [connection signal="toggled" from="Interface/UI/HBoxContainer/Building" to="." method="_on_building_toggled"]
 [connection signal="pressed" from="Interface/UI/HBoxContainer/Mision" to="Interface/UI/Panel" method="_on_mision_pressed"]
+[connection signal="pressed" from="Interface/UI/HBoxContainer/Mision" to="Utilities/CArbol" method="_on_mision_pressed"]
 [connection signal="ready" from="Interface/UI/Panel" to="Interface/UI/Panel" method="_on_ready"]
 [connection signal="pressed" from="Menu/Pause/BlackOverlay/VBoxContainer/MainMenu" to="Menu/Pause" method="_on_main_menu_pressed"]
 [connection signal="pressed" from="Menu/Pause/BlackOverlay/VBoxContainer/Save" to="Utilities/SaveLoader" method="save_game"]

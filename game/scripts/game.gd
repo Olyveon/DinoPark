@@ -61,10 +61,11 @@ func _input(event):
 func build(position:Vector2,id:int):
 	var new_building = buildings_list[id].instantiate()
 	estructura.lista_edificio.agregar("0")
-	Global.money -= 100
+	Global.money -= 200
 	new_building.global_position = tile_map.map_to_local(position)
 	tile_map.add_child(new_building)
 	print("edificio agregado" + str(buildings_list[id]))
+	Global.buildings+=1
 	#Los numeros en esta seccion equivalen a los index de las evoluciones +5
 	if id==6:
 		Global.dinos.append("Tiranosaurio")

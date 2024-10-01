@@ -3,6 +3,7 @@ var mision_labels = {}
 
 # Referencia al contenedor donde mostrarás las misiones
 @onready var mision_container = get_node("/root/Game/Interface/UI/Panel/Mision_container")
+@onready var estructura = get_node("/root/Game/Utilities/Clist")
 class MisionNode:
 	var nombre: String
 	var completada: bool = false
@@ -58,10 +59,15 @@ func _ready():
 
 
 # Función para mostrar las misiones en el panel
+# Función para mostrar las misiones en el panel
 func mostrar_misiones(mision: MisionNode):
+	# Verificar si la misión ya ha sido mostrada
+	if mision_labels.has(mision):
+		return  # Salir si ya se mostró
+
 	# Crear un HBoxContainer para la misión
 	var hbox = HBoxContainer.new()
-	
+
 	# Crear un Label para la misión y agregarlo al HBoxContainer
 	var label = Label.new()
 	label.text = mision.nombre
@@ -70,14 +76,16 @@ func mostrar_misiones(mision: MisionNode):
 
 	# Agregar el HBoxContainer al VBoxContainer creado en la interfaz
 	mision_container.add_child(hbox)
-	
+
 	# Almacenar el label en un diccionario si necesitas acceder a él después
 	mision_labels[mision] = label
-	
+
+	# Solo llamar a mostrar_misiones en hijos si la misión está desbloqueada
 	if condicion_para_completar(mision):
 		print("hola")
 		for hijo in mision.hijos:
-				mostrar_misiones(hijo)
+			mostrar_misiones(hijo)  # Llamada recursiva para los hijos
+
 
 # Función para actualizar el estado visual de las misiones
 func actualizar_mision_visual(mision: MisionNode):
@@ -139,29 +147,37 @@ func condicion_para_completar(mision: MisionNode):
 		return true
 
 func check_if_building_is_complete():
-	# Lógica para comprobar si el edificio está construido
-	return true  # Simulación de que la condición se cumple
+	if Global.buildings>=1:
+		return true
 
 func check_if_building_is_destroyed():
-	# Lógica para comprobar si el edificio está destruido
-	return false  # Simulación de que aún no se cumple
+	if estructura.lista_edificio.tamaño_lista()<Global.buildings:
+		return true  # Simulación de que aún no se cumple
 
 func check_if_cage_is_built():
-	# Lógica para comprobar si la jaula está construida
-	return false  # Simulación de que la condición aún no se cumple
+	if Global.dinos.size()>0:
+		return true  # Simulación de que la condición aún no se cumple
 
 func check_if_dinosaur_is_bought():
-	# Lógica para comprobar si se ha comprado un dinosaurio
-	return false  # Simulación de que aún no se cumple
+	if Global.dinos.size()>0:
+		return true  # Simulación de que la condición aún no se cumple
 
 func check_if_special_building_is_built():
-	# Lógica para comprobar si el edificio especial está construido
-	return false  # Simulación de que la condición aún no se cumple
+	if Global.building_id == 5 or Global.building_id == 14:
+		return true  # Simulación de que la condición aún no se cumple
 
 func check_if_two_species_are_bought():
-	# Lógica para comprobar si se han comprado dos especies
-	return false  # Simulación de que aún no se cumple
+	if Global.dinos.size()>2:
+		for i in Global.dinos:
+			if i != i+1:
+				return true
 
 func check_if_dinosaur_is_evolved():
+	if Global.dinos_evo.size()>0:
 	# Lógica para comprobar si un dinosaurio ha evolucionado
-	return false  # Simulación de que aún no se cumple
+		return true  # Simulación de que aún no se cumple
+
+
+func _on_mision_pressed():
+	verificar_misiones(raiz_mision)
+	actualizar_mision_visual(raiz_mision)
