@@ -1,22 +1,32 @@
-extends Node2D
+[gd_scene load_steps=6 format=3 uid="uid://coj24my3ily5"]
+
+[ext_resource type="Texture2D" uid="uid://qfnvt884xgtw" path="res://assets/sprites/dino_cell.png" id="1_qwqds"]
+[ext_resource type="Texture2D" uid="uid://dwo5x23cq0tcc" path="res://assets/sprites/Dinosaurios/ESTEGOSAURIO BEBE.png" id="2_3ks2g"]
+[ext_resource type="Texture2D" uid="uid://dgbn6jb5yq7hu" path="res://assets/sprites/Dinosaurios/ESTEGOSAURIO ADULTO.png" id="3_snbp5"]
+[ext_resource type="PackedScene" uid="uid://cgas6c7kt33q1" path="res://scenes/ui/info_box.tscn" id="4_hp3uj"]
+
+[sub_resource type="GDScript" id="GDScript_pabg6"]
+script/source = "extends Node2D
+
 
 const MINUTES_PER_DAY = 1440 
 const MINUTES_PER_HOUR = 60
 const INGAME_TO_REAL_MINUTE_DURATION = (2 * PI) / MINUTES_PER_DAY
 
 var cell_position
-var building_name:String = "Jaula de Dinosaurios"
+var building_name:String = \"Jaula del Estegosaurio\"
 var is_point_inside = false
 # cooldown is defined in in-game minutes 
-var cooldown = 1
+var cooldown = 15
 # This variables are used when loading and unloading a game file
 var target_minute = 60
 var target_hour = 24
 # How much money does it generate
-var revenue = 0
+var revenue = 200
 
 @onready var menu_box = $MenuBox
 @onready var tile_map = get_parent()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,10 +45,10 @@ func _process(delta):
 func _input(event):
 	# Check if the event is a mouse button press
 	if is_point_inside:
-			if event.is_action_pressed("click_left"):
+			if event.is_action_pressed(\"click_left\"):
 				if Global.building_mode == false:
 					on_click()
-			if event.is_action_pressed("click_right"):
+			if event.is_action_pressed(\"click_right\"):
 				if Global.building_mode:
 					tile_map.erase_cell(1,cell_position)
 					tile_map.remove_child(self)
@@ -57,8 +67,7 @@ func on_click():
 	menu_box.visible = new_state
 	if new_state == true :
 		menu_box.position = menu_box.position - Vector2i(20,20)
-	var revenue_per_hour = 0
-	menu_box.mesage("jaula","Jaula Vacia")
+		menu_box.mesage(building_name,\"Actualmente esta generando: \" + \"$\" + str(revenue) + \" cada \" + str(cooldown) + \" minutos\" )
 
 # Defines what properties will be saved 
 func on_save_game(saved_data:Array[SavedData]):
@@ -105,4 +114,38 @@ func on_time():
 
 func minutes(x):
 	return 60/x
+"
 
+[node name="Estegosaurio" type="Node2D" groups=["buildings", "game_objects"]]
+script = SubResource("GDScript_pabg6")
+
+[node name="Jaula" type="Sprite2D" parent="."]
+position = Vector2(0.999999, -78)
+scale = Vector2(1.18359, 1.16667)
+texture = ExtResource("1_qwqds")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(-1, -6)
+polygon = PackedVector2Array(0, -64, -127, 0, 0, 65, 83.9732, 23.0134, 128, 1)
+
+[node name="Bebe" type="Sprite2D" parent="."]
+position = Vector2(2, -41)
+scale = Vector2(0.0976133, 0.0976133)
+texture = ExtResource("2_3ks2g")
+
+[node name="Adulto" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-9.24999, -51.75)
+scale = Vector2(0.277, 0.277)
+texture = ExtResource("3_snbp5")
+
+[node name="MenuBox" parent="." instance=ExtResource("4_hp3uj")]
+initial_position = 2
+visible = false
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+
+[editable path="MenuBox"]

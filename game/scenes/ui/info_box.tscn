@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgas6c7kt33q1"]
 
 [ext_resource type="Script" path="res://scripts/info_box.gd" id="1_0owp4"]
-[ext_resource type="Theme" uid="uid://dtj8rj0oefags" path="res://scenes/ui/DinoPark.tres" id="1_ahnyo"]
+[ext_resource type="Theme" uid="uid://orocpndgjqbk" path="res://scenes/ui/DinoPark.tres" id="1_ahnyo"]
 
 [node name="MenuBox" type="Window"]
 position = Vector2i(0, 36)

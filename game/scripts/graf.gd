@@ -31,10 +31,14 @@ func obtener_cruces(dinosaurio: String) -> Array:
 # Ready function for testing purpouses
 func _ready() -> void:
 	# Create the dinosaur graph
-	agregar_dinosaurio("Tyrannosaurus")
+	agregar_dinosaurio("Tirannosaurio")
 	agregar_dinosaurio("Triceratops")
 	agregar_dinosaurio("Velociraptor")
-	agregar_dinosaurio("Stegosaurus")
+	agregar_dinosaurio("Estegosaurus")
+	agregar_dinosaurio("Parasaurio")
+	agregar_dinosaurio("Espinosaurio")
+	agregar_dinosaurio("Gigantosaurio")
+	agregar_dinosaurio("Alosaurio")
 
 	# Define the possible cross combinations (edges)
 	agregar_cruce("Tyrannosaurus", "Velociraptor")

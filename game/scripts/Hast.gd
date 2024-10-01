@@ -19,9 +19,14 @@ class Dinosaurio:
 
 # Diccionario con los dinosaurios
 var dinosaurios = {
-	1: Dinosaurio.new(1, "T-Rex", Etapa.BEBE, Etapa.ADULTO),
-	2: Dinosaurio.new(2, "Velociraptor", Etapa.BEBE, Etapa.ADULTO),
-	3: Dinosaurio.new(3, "Triceratops", Etapa.BEBE, Etapa.ADULTO)
+	1: Dinosaurio.new(1, "Tiranosaurio", Etapa.BEBE, Etapa.ADULTO),
+	2: Dinosaurio.new(2, "Alosaurio", Etapa.BEBE, Etapa.ADULTO),
+	3: Dinosaurio.new(3, "Espinosaurio", Etapa.BEBE, Etapa.ADULTO),
+	4: Dinosaurio.new(4, "Estegosaurio", Etapa.BEBE, Etapa.ADULTO),
+	5: Dinosaurio.new(5, "Parasaurio", Etapa.BEBE, Etapa.ADULTO),
+	6: Dinosaurio.new(6, "Gigantosaurio", Etapa.BEBE, Etapa.ADULTO),
+	7: Dinosaurio.new(7, "Velocirraptor", Etapa.BEBE, Etapa.ADULTO),
+	8: Dinosaurio.new(8, "Triceratops", Etapa.BEBE, Etapa.ADULTO),
 }
 
 # Función para evolucionar un dinosaurio

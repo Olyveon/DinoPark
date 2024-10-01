@@ -73,14 +73,14 @@ var estructura_desbloqueada = false
 
 
 func seleccionar_edificio(edificio_id):
-	if lista_edificio.tamaño_lista() == 1 :
-		mostrar_alerta()
-		return false 
-	if lista_edificio.tamaño_lista() > 2:
-		
+	if lista_edificio.tamaño_lista() > 2 or int(edificio_id)<=4:
 		return true
 	print(str(lista_edificio.tamaño_lista()))
 	print("Edificio seleccionado: " + edificio_id)
+	
+	if int(edificio_id)>4 and lista_edificio.tamaño_lista()<2:
+		mostrar_alerta()
+		return false
 
 
 func mostrar_alerta():

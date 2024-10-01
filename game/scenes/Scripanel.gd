@@ -2,7 +2,7 @@ extends Panel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.visible=true
+	self.visible=false
 	pass # Replace with function body.
 
 
@@ -10,3 +10,7 @@ func _ready():
 func _process(delta):
 	pass
 
+
+
+func _on_mision_pressed():
+	self.visible=!self.visible
