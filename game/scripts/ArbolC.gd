@@ -1,6 +1,8 @@
 extends Node
 var mision_labels = {}
-
+var all_mision:Array=[cruce_mision,evoluciona_mision,compra_dos_especies_mision,crea_edificio_especial_mision,crea_jaula_mision,destruye_edificio_mision,compra_dinosaurio_mision,construye_edificio_mision]
+var unlocked:Array=[]
+var completed:Array=[]
 # Referencia al contenedor donde mostrarás las misiones
 @onready var mision_container = get_node("/root/Game/Interface/UI/Panel/Mision_container")
 @onready var estructura = get_node("/root/Game/Utilities/Clist")
@@ -42,8 +44,6 @@ var construye_edificio_mision = MisionNode.new("Construye un edificio", [destruy
 
 # Nodo raíz, la primera misión
 var raiz_mision = construye_edificio_mision
-
-
 # Función que se ejecuta al inicio del juego o escena
 func _ready():
 	print("Juego iniciado")
@@ -55,7 +55,15 @@ func _ready():
 # Ejemplo de cómo se podría monitorizar el estado de las misiones
 # Cada frame se comprueba si las condiciones de la misión se cumplen
 #odrías tener una función que verifique si una misión debe completarse
-
+func crear_listas():
+	for i in all_mision:
+		verificar_misiones(i)
+		if i.condicion_para_completar()==true:
+			var new=i.hijos.desbloquear_mision()
+			unlocked.append(new)
+			completed.append(i)
+		else:
+			pass
 
 
 # Función para mostrar las misiones en el panel
