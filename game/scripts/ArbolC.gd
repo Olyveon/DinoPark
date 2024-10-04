@@ -1,8 +1,9 @@
 extends Node
 var mision_labels = {}
-var all_mision:Array=[cruce_mision,evoluciona_mision,compra_dos_especies_mision,crea_edificio_especial_mision,crea_jaula_mision,destruye_edificio_mision,compra_dinosaurio_mision,construye_edificio_mision]
+var all:Array=[cruce_mision,evoluciona_mision,compra_dos_especies_mision,crea_edificio_especial_mision,crea_jaula_mision,destruye_edificio_mision,compra_dinosaurio_mision,construye_edificio_mision]
 var unlocked:Array=[]
 var completed:Array=[]
+var completed_first:Array=[]
 # Referencia al contenedor donde mostrarás las misiones
 @onready var mision_container = get_node("/root/Game/Interface/UI/Panel/Mision_container")
 @onready var estructura = get_node("/root/Game/Utilities/Clist")
@@ -45,59 +46,74 @@ var construye_edificio_mision = MisionNode.new("Construye un edificio", [destruy
 # Nodo raíz, la primera misión
 var raiz_mision = construye_edificio_mision
 # Función que se ejecuta al inicio del juego o escena
+var all_mision:Array=[cruce_mision,evoluciona_mision,compra_dos_especies_mision,crea_edificio_especial_mision,crea_jaula_mision,destruye_edificio_mision,compra_dinosaurio_mision,construye_edificio_mision]
+
 func _ready():
 	print("Juego iniciado")
 	raiz_mision.desbloquear_mision()
-	mostrar_misiones(raiz_mision)
+	unlocked.append(raiz_mision)
+	generar_labels_para_misiones(completed,unlocked)
 	verificar_misiones(raiz_mision)
+	limpiar_mision_container()
 
 
 # Ejemplo de cómo se podría monitorizar el estado de las misiones
 # Cada frame se comprueba si las condiciones de la misión se cumplen
 #odrías tener una función que verifique si una misión debe completarse
 func crear_listas():
+	var new_mision:Array
 	for i in all_mision:
-		verificar_misiones(i)
-		if i.condicion_para_completar()==true:
-			var new=i.hijos.desbloquear_mision()
-			unlocked.append(new)
+		if i in unlocked or i in completed:
+			pass
+		if i in unlocked and i in completed:
+			unlocked.erase(i)
+		if condicion_para_completar(i)== true and i not in completed_first:
+			completed_first.append(i)
+		if condicion_para_completar(i)==true:
+			for f in i.hijos:
+				f.desbloquear_mision()
+				unlocked.append(f)
 			completed.append(i)
 		else:
 			pass
+func limpiar_mision_container():
+	var conteo=0
+	for child in mision_container.get_children():
+		child.queue_free()
+		conteo+=1
+	mision_container.call_deferred("free_children")  # Liberar todos los hijos
+	if conteo> unlocked.size()+completed.size():
+		var labels_totales= unlocked.size()+completed.size()
+		for child in mision_container.get_children():
+			pass
 
+func generar_labels_para_misiones(completed: Array, unlocked: Array):
+	# Primero, limpiar el VBoxContainer para evitar duplicaciones
+	limpiar_mision_container()
+
+	# Crear labels en verde para las misiones completadas
+	for mision in completed:
+		var label = Label.new()
+		label.text = mision.nombre  # Asigna el nombre de la misión
+		label.modulate=Color(0, 1, 0, 1)  # Color verde para misiones completadas
+		mision_container.add_child(label)  # Agregar el label al VBoxContainer
+
+	# Crear labels en gris para las misiones desbloqueadas
+	for mision in unlocked:
+		var label = Label.new()
+		label.text = mision.nombre  # Asigna el nombre de la misión
+		label.modulate=Color(1, 1, 1, 0.5)  # Color gris para misiones desbloqueadas
+		mision_container.add_child(label)  # Agregar el label al VBoxContainer
 
 # Función para mostrar las misiones en el panel
 # Función para mostrar las misiones en el panel
 func mostrar_misiones(mision: MisionNode):
-	# Verificar si la misión ya ha sido mostrada
-	if mision_labels.has(mision):
-		return  # Salir si ya se mostró
-
-	# Crear un HBoxContainer para la misión
-	var hbox = HBoxContainer.new()
-
-	# Crear un Label para la misión y agregarlo al HBoxContainer
-	var label = Label.new()
-	label.text = mision.nombre
-	label.modulate = Color(1, 1, 1, 0.5)  # Texto gris para indicar que está bloqueada
-	hbox.add_child(label)
-
-	# Agregar el HBoxContainer al VBoxContainer creado en la interfaz
-	mision_container.add_child(hbox)
-
-	# Almacenar el label en un diccionario si necesitas acceder a él después
-	mision_labels[mision] = label
-
-	# Solo llamar a mostrar_misiones en hijos si la misión está desbloqueada
-	if condicion_para_completar(mision):
-		print("hola")
-		for hijo in mision.hijos:
-			mostrar_misiones(hijo)  # Llamada recursiva para los hijos
+	pass
 
 
 # Función para actualizar el estado visual de las misiones
 func actualizar_mision_visual(mision: MisionNode):
-	  # Verificar si la misión está en el diccionario
+	limpiar_mision_container()
 	if mision_labels.has(mision):
 		var label = mision_labels[mision]
 		
@@ -113,11 +129,13 @@ func actualizar_mision_visual(mision: MisionNode):
 
 # Verifica y actualiza todas las misiones en el árbol
 func verificar_misiones(mision: MisionNode):
+	limpiar_mision_container()
 	print("Verificando misión:", mision.nombre)  # Mensaje de depuración
 
 	# Verifica si la misión ya está completada
 	if mision.completada:
-		print("Misión ya completada:", mision.nombre)  # Mensaje de depuración
+		print("Misión ya completada:", mision.nombre)
+		return true  # Mensaje de depuración
 		 # Salir si ya está completada
 
 	# Si no está completada y se puede completar, lo hacemos
@@ -133,7 +151,6 @@ func verificar_misiones(mision: MisionNode):
 func confirmar_completado(mision: MisionNode):
 	if not mision.completada:  # Verifica si no ha sido completada antes
 		mision.completar_mision()  # Completa la misión
-		actualizar_mision_visual(mision)  # Actualiza su visualización
 
 
 # Función que verifica la condición de completar cada misión
@@ -175,9 +192,10 @@ func check_if_special_building_is_built():
 		return true  # Simulación de que la condición aún no se cumple
 
 func check_if_two_species_are_bought():
+	var tamaño=Global.dinos.size()
 	if Global.dinos.size()>2:
-		for i in Global.dinos:
-			if i != i+1:
+		for i in range(0,tamaño-1):
+			if Global.dinos[i] != Global.dinos[i+1]:
 				return true
 
 func check_if_dinosaur_is_evolved():
@@ -187,5 +205,12 @@ func check_if_dinosaur_is_evolved():
 
 
 func _on_mision_pressed():
-	verificar_misiones(raiz_mision)
-	actualizar_mision_visual(raiz_mision)
+	unlocked=[construye_edificio_mision]
+	completed=[]
+	crear_listas()
+	for i in unlocked:
+		if i in unlocked and i in completed:
+			unlocked.erase(i)
+		if i in completed and completed_first:
+			pass
+	generar_labels_para_misiones(completed_first,unlocked)
