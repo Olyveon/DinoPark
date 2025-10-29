@@ -27,24 +27,6 @@ func _ready():
 	Global.building_mode = false
 	canvas_modulate.time_tick.connect(ui.set_daytime)
 	canvas_modulate.pause_tick.connect(ui.pause)
-	# Adds all the buildings to an array with its id 
-	buildings_list.insert(0,building)
-	buildings_list.insert(1,dinocell)
-	buildings_list.insert(2,mountain)
-	buildings_list.insert(3, museum)
-	buildings_list.insert(4,rueda)
-	buildings_list.insert(5, cruces)
-	buildings_list.insert(6, Tiranosaurio)
-	buildings_list.insert(7, Alosaurio)
-	buildings_list.insert(8, Espinosaurio)
-	buildings_list.insert(9, Estegosaurio)
-	buildings_list.insert(10, Parasaurio)
-	buildings_list.insert(11, Gigantosaurio)
-	buildings_list.insert(12, Velocirraptor)
-	buildings_list.insert(13, Triceratops)
-	buildings_list.insert(14, Evos)
-	estructura.lista_edificio.mostrar_lista()
-
 
 #Construction mode
 func _input(event):
