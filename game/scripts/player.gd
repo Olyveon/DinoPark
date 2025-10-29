@@ -1,9 +1,9 @@
 extends Node2D
 @onready var camera = $Camera
-const camera_speed = 200.0
+const camera_speed = 250.0
 # Camera zoom values
-var zoom_minimum = Vector2(.2,.2)
-var zoom_maximum = Vector2(2.5,2.5)
+var zoom_minimum = Vector2(.4,.4)
+var zoom_maximum = Vector2(2.4,2.4)
 var zoom_speed = Vector2(.1,.1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

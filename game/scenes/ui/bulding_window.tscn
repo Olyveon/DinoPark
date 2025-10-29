@@ -1,0 +1,154 @@
+[gd_scene load_steps=10 format=3 uid="uid://j4jtar5evxf4"]
+
+[ext_resource type="Script" path="res://scripts/bulding_window.gd" id="1_je6y0"]
+[ext_resource type="Theme" uid="uid://orocpndgjqbk" path="res://scenes/ui/DinoPark.tres" id="2_8m508"]
+[ext_resource type="Texture2D" uid="uid://demel4nhnpdb7" path="res://assets/sprites/No_Funcion_buildings_Circle.png" id="2_vjbn8"]
+[ext_resource type="Texture2D" uid="uid://igf4kdxx0h3y" path="res://assets/sprites/No_Funcion_buildings_Mountain.png" id="3_e5skm"]
+[ext_resource type="Texture2D" uid="uid://c85n2apmaa6nt" path="res://assets/sprites/No_Funcion_buildings_Museum.png" id="4_mrr3r"]
+[ext_resource type="Texture2D" uid="uid://dhie4tjiba0x2" path="res://assets/sprites/Edificio_cruces.png" id="6_qf5tc"]
+[ext_resource type="Texture2D" uid="uid://v5360cxgdec8" path="res://assets/sprites/Edificio_Evos.png" id="7_cthfn"]
+[ext_resource type="PackedScene" uid="uid://cgas6c7kt33q1" path="res://scenes/ui/info_box.tscn" id="7_klrcd"]
+[ext_resource type="Script" path="res://scripts/info_box.gd" id="8_yq5i6"]
+
+[node name="Window" type="Window"]
+title = "Edificios"
+initial_position = 1
+size = Vector2i(256, 218)
+unresizable = true
+content_scale_aspect = 4
+theme = ExtResource("2_8m508")
+script = ExtResource("1_je6y0")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(300, 30)
+layout_direction = 2
+offset_right = 300.0
+offset_bottom = 66.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+auto_translate = false
+localize_numeral_system = false
+theme = ExtResource("2_8m508")
+
+[node name="standard" type="Button" parent="GridContainer"]
+visible = false
+layout_mode = 2
+text = "Standard Building"
+
+[node name="cell" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Jaula"
+
+[node name="mountain" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(256, 33)
+layout_mode = 2
+text = "Montaña"
+icon = ExtResource("3_e5skm")
+icon_alignment = 2
+expand_icon = true
+
+[node name="museum" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Museo"
+icon = ExtResource("4_mrr3r")
+icon_alignment = 2
+expand_icon = true
+
+[node name="circle" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Rueda"
+icon = ExtResource("2_vjbn8")
+icon_alignment = 2
+expand_icon = true
+
+[node name="cruces" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Cruces"
+icon = ExtResource("6_qf5tc")
+icon_alignment = 2
+expand_icon = true
+
+[node name="evos" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Evoluciones"
+icon = ExtResource("7_cthfn")
+icon_alignment = 2
+expand_icon = true
+
+[node name="MenuBox" parent="." instance=ExtResource("7_klrcd")]
+initial_position = 2
+size = Vector2i(470, 40)
+visible = false
+content_scale_aspect = 4
+
+[node name="MarginContainer" parent="MenuBox" index="0"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RevenueLabel" parent="MenuBox/MarginContainer/VBoxContainer" index="0"]
+size_flags_vertical = 3
+
+[node name="Tienda" type="Window" parent="."]
+title = "Tienda de Dinos"
+position = Vector2i(500, 300)
+size = Vector2i(350, 110)
+visible = false
+script = ExtResource("8_yq5i6")
+
+[node name="GridContainer" type="GridContainer" parent="Tienda"]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 3
+
+[node name="Tiranosaurio" type="Button" parent="Tienda/GridContainer"]
+layout_mode = 2
+text = "Tiranosaurio"
+
+[node name="Velocirraptor" type="Button" parent="Tienda/GridContainer"]
+layout_mode = 2
+text = "Velocirraptor"
+
+[node name="Alosaurio" type="Button" parent="Tienda/GridContainer"]
+layout_mode = 2
+text = "Alosaurio"
+
+[node name="Espinosaurio" type="Button" parent="Tienda/GridContainer"]
+layout_mode = 2
+text = "Espinosaurio"
+
+[node name="Estegosaurio" type="Button" parent="Tienda/GridContainer"]
+layout_mode = 2
+text = "Estegosaurio"
+
+[node name="Gigantosaurio" type="Button" parent="Tienda/GridContainer"]
+layout_mode = 2
+text = "Gigantosaurio"
+
+[node name="Parasaurio" type="Button" parent="Tienda/GridContainer"]
+layout_mode = 2
+text = "Parasaurio"
+
+[node name="Triceratops" type="Button" parent="Tienda/GridContainer"]
+layout_mode = 2
+text = "Triceratops"
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="GridContainer/standard" to="." method="_on_standard_pressed"]
+[connection signal="pressed" from="GridContainer/cell" to="." method="_on_cell_pressed"]
+[connection signal="pressed" from="GridContainer/mountain" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GridContainer/museum" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="GridContainer/circle" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="GridContainer/cruces" to="." method="_on_cruces_pressed"]
+[connection signal="pressed" from="GridContainer/evos" to="." method="_on_evos_pressed"]
+[connection signal="close_requested" from="Tienda" to="Tienda" method="_on_close_requested"]
+[connection signal="pressed" from="Tienda/GridContainer/Tiranosaurio" to="." method="_on_tiranosaurio_pressed"]
+[connection signal="pressed" from="Tienda/GridContainer/Velocirraptor" to="." method="_on_velocirraptor_pressed"]
+[connection signal="pressed" from="Tienda/GridContainer/Alosaurio" to="." method="_on_alosaurio_pressed"]
+[connection signal="pressed" from="Tienda/GridContainer/Espinosaurio" to="." method="_on_espinosaurio_pressed"]
+[connection signal="pressed" from="Tienda/GridContainer/Estegosaurio" to="." method="_on_estegosaurio_pressed"]
+[connection signal="pressed" from="Tienda/GridContainer/Gigantosaurio" to="." method="_on_gigantosaurio_pressed"]
+[connection signal="pressed" from="Tienda/GridContainer/Parasaurio" to="." method="_on_parasaurio_pressed"]
+[connection signal="pressed" from="Tienda/GridContainer/Triceratops" to="." method="_on_triceratops_pressed"]
+
+[editable path="MenuBox"]

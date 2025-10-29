@@ -1,6 +1,8 @@
 #include "register_types.h"
 // Put here the custom classes headers to add them
 #include "custom_list.h"
+#include "custom_tree.h"
+#include "building_tree.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -13,6 +15,8 @@ void initialize_module(ModuleInitializationLevel p_level) {
 		return;
 	}
 	ClassDB::register_class<CustomList>();
+	ClassDB::register_class<CustomTree>();
+	ClassDB::register_class<BuildingTree>();
 }
 
 void uninitialize_module(ModuleInitializationLevel p_level) {

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://5u0gplbsv6qe"]
+
+[ext_resource type="Script" path="res://scripts/dinocell.gd" id="1_1e7qs"]
+[ext_resource type="Texture2D" uid="uid://qfnvt884xgtw" path="res://assets/sprites/dino_cell.png" id="2_2r2k1"]
+[ext_resource type="PackedScene" uid="uid://cgas6c7kt33q1" path="res://scenes/ui/info_box.tscn" id="3_fks1a"]
+
+[node name="DinoCell" type="Node2D" groups=["buildings", "game_objects"]]
+script = ExtResource("1_1e7qs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -64)
+texture = ExtResource("2_2r2k1")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(0, -65, -107, -11, -107, -2, 0, 52, 107, -1, 107, -11)
+
+[node name="MenuBox" parent="." instance=ExtResource("3_fks1a")]
+position = Vector2i(0, 36)
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
